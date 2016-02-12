@@ -1,35 +1,45 @@
+<!--TUTORIAL USED: http://codepen.io/Russbrown/pen/IgBuh -->
+<!--AURORA HAVENS-->
+
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Todo Application</title>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
-  </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+    
 
+<body>
+  <div ng-app="Todo" ng-controller="todoCtrl"> 
+        <h2>You've got <span class="emphasis">{{getTotalTodos()}}</span> things to do</h2>
+        
 
-  <body>
-  	<div ng-app="Todo" ng-controller="TodoCtrl">
-      <input type="text" ng-model="message" />
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="todo in todos">
+              <input type="checkbox" ng-model="todo.done"/>
+                <span class="done-{{todo.done}}">{{todo.item}}</span>
+            </li>
+        </ul>
+           
       
-      <ul class="todo-list" ng-repeat="todo in todos track by $index">
-        <li>
-          <span>{{ todo }}</span>
-          <button class="bt bt-achieve">Done</button>
-        </li>
-      </ul>
-    </div>
+        <form>
+            <input class="add-input" placeholder="Item..." type="text" ng-model="item" ng-model-instant/>
+            <!--This is where it get's tricky-->
+            <button class="add-btn" ng-click="addTodo()"><h2>Add</h2></button>
+            
+        </form>
+            
+        <ul>
+          <li ng-repeat="t in tasks track by $index"> <button ng-click="delete()">x</button></li>
+        </ul>
+              
 
-    <script>
-    var app = angular.module('Todo',[]);
-
-    app.controller('TodoCtrl', function($scope)
-    {
-        $scope.todos={
-          'Learn Sketch',
-          'Look at Dribble and feel inferior',
-          'Actually learn how to use the pen tool'
-        };
-    });
-    </script>
+  
+        
+  </div>
+      
+  
+    
+  <script src="script.js"></script>
 
   </body>
 </html>
